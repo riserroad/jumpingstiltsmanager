@@ -1,20 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Riser Road{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+
+    .liste-jumpingTilt {
+        border: solid red 2px;
+    }
 </style>
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/popschool/riserRoad/symfony/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/popschool/riserRoad/symfony/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+    <h2>Liste Echasse</h2>
+    {% for jumpingTilt in jumpingTilts %}
+    {# dump(jumpingTilt) #}
+    <div class="liste-jumpingTilt">
+        <p><strong>Référence : </strong> {{ jumpingTilt.getReference() }} </p>
+        <p></p><strong>Dureté des  lames : </strong> {{ jumpingTilt.getWeight() }} </p>
+        <p><strong>Etat : </strong> : {{ jumpingTilt.getState().getState() }} </p>
+        <p><strong>Category  : </strong> : {{ jumpingTilt.getCategory().getCategory() }} </p>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
