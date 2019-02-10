@@ -19,7 +19,7 @@ class JumpingTilt
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, unique=true)
      */
     private $reference;
 
