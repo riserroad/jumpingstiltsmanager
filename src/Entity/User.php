@@ -42,6 +42,10 @@ class User
     {
         $this->rentals = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->firstname . " " .  strtoupper($this->lastname) ; 
+    }
 
     public function getId(): ?int
     {
