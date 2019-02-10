@@ -32,6 +32,10 @@ class State
     {
         $this->jumpingTilts = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->state; 
+    }
 
     public function getId(): ?int
     {

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit JumpingTilt{% endblock %}
+
+{% block body %}
+    <h1>Edit JumpingTilt</h1>
+
+    {{ include('jumping_tilt/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('jumping_tilt_index') }}">back to list</a>
+
+    {{ include('jumping_tilt/_delete_form.html.twig') }}
+{% endblock %}

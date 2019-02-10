@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}JumpingTilt index{% endblock %}
+
+{% block body %}
+    <h1>JumpingTilt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reference</th>
+                <th>Weight</th>
+                <th>Comment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jumping_tilt in jumping_tilts %}
+            <tr>
+                <td>{{ jumping_tilt.id }}</td>
+                <td>{{ jumping_tilt.reference }}</td>
+                <td>{{ jumping_tilt.weight }}</td>
+                <td>{{ jumping_tilt.comment }}</td>
+                <td>
+                    <a href="{{ path('jumping_tilt_show', {'id': jumping_tilt.id}) }}">show</a>
+                    <a href="{{ path('jumping_tilt_edit', {'id': jumping_tilt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('jumping_tilt_new') }}">Create new</a>
+{% endblock %}

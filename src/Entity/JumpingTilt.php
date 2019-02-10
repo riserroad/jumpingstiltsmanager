@@ -19,7 +19,7 @@ class JumpingTilt
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, unique=true)
      */
     private $reference;
 
@@ -53,6 +53,10 @@ class JumpingTilt
     public function __construct()
     {
         $this->repairCommentaries = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->reference;
     }
 
     public function getId(): ?int
