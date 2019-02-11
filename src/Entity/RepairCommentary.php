@@ -34,6 +34,11 @@ class RepairCommentary
      */
     private $jumping_tilt;
 
+    public function __toString()
+    {
+        return $this->comment ; 
+    }
+
     public function getId(): ?int
     {
         return $this->id;
