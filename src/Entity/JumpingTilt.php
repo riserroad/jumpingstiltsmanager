@@ -61,6 +61,10 @@ class JumpingTilt
     {
         $this->repair_comments = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->reference ; 
+    }
 
     public function getId(): ?int
     {

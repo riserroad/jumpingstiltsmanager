@@ -45,6 +45,11 @@ class Riser
         $this->lendings = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->firstname . " " . strtoupper($this->lastname) ; 
+    }
+
     public function getId(): ?int
     {
         return $this->id;
