@@ -21,20 +21,19 @@ class JumpingTilt
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5, unique=true)
+     * @ORM\Column(type="string", length=5)
      */
     private $reference;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $weight;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="jumpingTilts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $state;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="jumpingTilts")
@@ -43,22 +42,24 @@ class JumpingTilt
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\RepairCommentary", mappedBy="jumping_tilt")
+     * @ORM\ManyToOne(targetEntity="App\Entity\State", inversedBy="jumpingTilts")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $repairCommentaries;
+    private $state;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\RepairCommentary", mappedBy="jumpingTilt")
      */
-    private $comment;
+    private $repair_comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt", cascade={"persist", "remove"})
+     */
+    private $lending;
 
     public function __construct()
     {
-        $this->repairCommentaries = new ArrayCollection();
-    }
-    public function __toString()
-    {
-        return $this->reference;
+        $this->repair_comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,6 +79,18 @@ class JumpingTilt
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getWeight(): ?int
     {
         return $this->weight;
@@ -86,18 +99,6 @@ class JumpingTilt
     public function setWeight(?int $weight): self
     {
         $this->weight = $weight;
-
-        return $this;
-    }
-
-    public function getState(): ?State
-    {
-        return $this->state;
-    }
-
-    public function setState(?State $state): self
-    {
-        $this->state = $state;
 
         return $this;
     }
@@ -114,45 +115,62 @@ class JumpingTilt
         return $this;
     }
 
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
     /**
      * @return Collection|RepairCommentary[]
      */
-    public function getRepairCommentaries(): Collection
+    public function getRepairComments(): Collection
     {
-        return $this->repairCommentaries;
+        return $this->repair_comments;
     }
 
-    public function addRepairCommentary(RepairCommentary $repairCommentary): self
+    public function addRepairComment(RepairCommentary $repairComment): self
     {
-        if (!$this->repairCommentaries->contains($repairCommentary)) {
-            $this->repairCommentaries[] = $repairCommentary;
-            $repairCommentary->setJumpingTilt($this);
+        if (!$this->repair_comments->contains($repairComment)) {
+            $this->repair_comments[] = $repairComment;
+            $repairComment->setJumpingTilt($this);
         }
 
         return $this;
     }
 
-    public function removeRepairCommentary(RepairCommentary $repairCommentary): self
+    public function removeRepairComment(RepairCommentary $repairComment): self
     {
-        if ($this->repairCommentaries->contains($repairCommentary)) {
-            $this->repairCommentaries->removeElement($repairCommentary);
+        if ($this->repair_comments->contains($repairComment)) {
+            $this->repair_comments->removeElement($repairComment);
             // set the owning side to null (unless already changed)
-            if ($repairCommentary->getJumpingTilt() === $this) {
-                $repairCommentary->setJumpingTilt(null);
+            if ($repairComment->getJumpingTilt() === $this) {
+                $repairComment->setJumpingTilt(null);
             }
         }
 
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getLending(): ?Lending
     {
-        return $this->comment;
+        return $this->lending;
     }
 
-    public function setComment(?string $comment): self
+    public function setLending(Lending $lending): self
     {
-        $this->comment = $comment;
+        $this->lending = $lending;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $lending->getJumpingTilt()) {
+            $lending->setJumpingTilt($this);
+        }
 
         return $this;
     }

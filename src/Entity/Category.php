@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category
@@ -23,7 +21,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $category;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\JumpingTilt", mappedBy="category")
@@ -34,24 +32,20 @@ class Category
     {
         $this->jumpingTilts = new ArrayCollection();
     }
-    public function __toString()
-    {
-        return $this->category; 
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCategory(): ?string
+    public function getName(): ?string
     {
-        return $this->category;
+        return $this->name;
     }
 
-    public function setCategory(string $category): self
+    public function setName(string $name): self
     {
-        $this->category = $category;
+        $this->name = $name;
 
         return $this;
     }

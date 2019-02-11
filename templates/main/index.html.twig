@@ -24,15 +24,7 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <h2>Liste Echasse</h2>
-    {% for jumpingTilt in jumpingTilts %}
-    {# dump(jumpingTilt) #}
-    <div class="liste-jumpingTilt">
-        <p><strong>Référence : </strong> {{ jumpingTilt.getReference() }} </p>
-        <p></p><strong>Dureté des  lames : </strong> {{ jumpingTilt.getWeight() }} </p>
-        <p><strong>Etat : </strong> : {{ jumpingTilt.getState().getState() }} </p>
-        <p><strong>Category  : </strong> : {{ jumpingTilt.getCategory().getCategory() }} </p>
-    </div>
-    {% endfor %}
+    <h2>Gestion Echasse Riser Road</h2>
+    
 </div>
 {% endblock %}

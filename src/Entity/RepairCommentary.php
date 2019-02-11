@@ -29,15 +29,10 @@ class RepairCommentary
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="repairCommentaries")
+     * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="repair_comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $jumping_tilt;
-
-    public function __toString()
-    {
-        return $this->comment ; 
-    }
+    private $jumpingTilt;
 
     public function getId(): ?int
     {
@@ -70,12 +65,12 @@ class RepairCommentary
 
     public function getJumpingTilt(): ?JumpingTilt
     {
-        return $this->jumping_tilt;
+        return $this->jumpingTilt;
     }
 
-    public function setJumpingTilt(?JumpingTilt $jumping_tilt): self
+    public function setJumpingTilt(?JumpingTilt $jumpingTilt): self
     {
-        $this->jumping_tilt = $jumping_tilt;
+        $this->jumpingTilt = $jumpingTilt;
 
         return $this;
     }

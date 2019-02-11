@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Rental;
+use App\Entity\Riser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Rental|null find($id, $lockMode = null, $lockVersion = null)
- * @method Rental|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rental[]    findAll()
- * @method Rental[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Riser|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Riser|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Riser[]    findAll()
+ * @method Riser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RentalRepository extends ServiceEntityRepository
+class RiserRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Rental::class);
+        parent::__construct($registry, Riser::class);
     }
 
     // /**
-    //  * @return Rental[] Returns an array of Rental objects
+    //  * @return Riser[] Returns an array of Riser objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RentalRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Rental
+    public function findOneBySomeField($value): ?Riser
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

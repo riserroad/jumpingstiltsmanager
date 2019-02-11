@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\RiserRepository")
  */
-class User
+class Riser
 {
     /**
      * @ORM\Id()
@@ -34,17 +36,13 @@ class User
     private $birthdate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Rental", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Lending", mappedBy="riser")
      */
-    private $rentals;
+    private $lendings;
 
     public function __construct()
     {
-        $this->rentals = new ArrayCollection();
-    }
-    public function __toString()
-    {
-        return $this->firstname . " " .  strtoupper($this->lastname) ; 
+        $this->lendings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,30 +87,30 @@ class User
     }
 
     /**
-     * @return Collection|Rental[]
+     * @return Collection|Lending[]
      */
-    public function getRentals(): Collection
+    public function getLendings(): Collection
     {
-        return $this->rentals;
+        return $this->lendings;
     }
 
-    public function addRental(Rental $rental): self
+    public function addLending(Lending $lending): self
     {
-        if (!$this->rentals->contains($rental)) {
-            $this->rentals[] = $rental;
-            $rental->setUser($this);
+        if (!$this->lendings->contains($lending)) {
+            $this->lendings[] = $lending;
+            $lending->setRiser($this);
         }
 
         return $this;
     }
 
-    public function removeRental(Rental $rental): self
+    public function removeLending(Lending $lending): self
     {
-        if ($this->rentals->contains($rental)) {
-            $this->rentals->removeElement($rental);
+        if ($this->lendings->contains($lending)) {
+            $this->lendings->removeElement($lending);
             // set the owning side to null (unless already changed)
-            if ($rental->getUser() === $this) {
-                $rental->setUser(null);
+            if ($lending->getRiser() === $this) {
+                $lending->setRiser(null);
             }
         }
 

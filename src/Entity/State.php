@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\StateRepository")
  */
 class State
@@ -23,7 +21,7 @@ class State
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $state;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\JumpingTilt", mappedBy="state")
@@ -34,24 +32,20 @@ class State
     {
         $this->jumpingTilts = new ArrayCollection();
     }
-    public function __toString()
-    {
-        return $this->state; 
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getState(): ?string
+    public function getName(): ?string
     {
-        return $this->state;
+        return $this->name;
     }
 
-    public function setState(string $state): self
+    public function setName(string $name): self
     {
-        $this->state = $state;
+        $this->name = $name;
 
         return $this;
     }

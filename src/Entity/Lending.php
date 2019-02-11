@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\RentalRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LendingRepository")
  */
-class Rental
+class Lending
 {
     /**
      * @ORM\Id()
@@ -29,16 +29,16 @@ class Rental
     private $end_date;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\JumpingTilt", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $jumping_tilt;
+    private $jumpingTilt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rentals")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $riser;
 
     public function getId(): ?int
     {
@@ -71,24 +71,24 @@ class Rental
 
     public function getJumpingTilt(): ?JumpingTilt
     {
-        return $this->jumping_tilt;
+        return $this->jumpingTilt;
     }
 
-    public function setJumpingTilt(JumpingTilt $jumping_tilt): self
+    public function setJumpingTilt(JumpingTilt $jumpingTilt): self
     {
-        $this->jumping_tilt = $jumping_tilt;
+        $this->jumpingTilt = $jumpingTilt;
 
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getRiser(): ?Riser
     {
-        return $this->user;
+        return $this->riser;
     }
 
-    public function setUser(?User $user): self
+    public function setRiser(?Riser $riser): self
     {
-        $this->user = $user;
+        $this->riser = $riser;
 
         return $this;
     }
