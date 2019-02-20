@@ -5,4 +5,8 @@ easy_admin:
         - App\Entity\Lending
         - App\Entity\JumpingTilt
         - App\Entity\RepairCommentary
+        - App\Entity\State
+        - App\Entity\Category
+
+        
        
