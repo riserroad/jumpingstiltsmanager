@@ -27,7 +27,11 @@ class Lending
     private $endDate;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
+=======
+     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
+>>>>>>> 9bca3f9... remove the oneToOne relation between lendind et jumping-tilt
      * @ORM\JoinColumn(nullable=false)
      */
     private $riser;
