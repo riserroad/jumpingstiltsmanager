@@ -36,14 +36,16 @@ class Riser
     private $birthdate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lending", mappedBy="riser")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lending", inversedBy="risers")
      */
-    private $lendings;
+    private $lending;
 
     public function __construct()
     {
-        $this->lendings = new ArrayCollection();
+        $this->lending = new ArrayCollection();
     }
+
+   
 
     public function __toString()
     {
@@ -94,16 +96,15 @@ class Riser
     /**
      * @return Collection|Lending[]
      */
-    public function getLendings(): Collection
+    public function getLending(): Collection
     {
-        return $this->lendings;
+        return $this->lending;
     }
 
     public function addLending(Lending $lending): self
     {
-        if (!$this->lendings->contains($lending)) {
-            $this->lendings[] = $lending;
-            $lending->setRiser($this);
+        if (!$this->lending->contains($lending)) {
+            $this->lending[] = $lending;
         }
 
         return $this;
@@ -111,14 +112,12 @@ class Riser
 
     public function removeLending(Lending $lending): self
     {
-        if ($this->lendings->contains($lending)) {
-            $this->lendings->removeElement($lending);
-            // set the owning side to null (unless already changed)
-            if ($lending->getRiser() === $this) {
-                $lending->setRiser(null);
-            }
+        if ($this->lending->contains($lending)) {
+            $this->lending->removeElement($lending);
         }
 
         return $this;
     }
+
+   
 }

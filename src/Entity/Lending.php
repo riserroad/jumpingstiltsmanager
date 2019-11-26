@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,17 +31,22 @@ class Lending
     private $end_date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Riser", mappedBy="lending")
      */
-    private $jumpingTilt;
+    private $risers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", mappedBy="lending")
      */
-    private $riser;
+    private $jumpingTilts;
 
+    public function __construct()
+    {
+        $this->risers = new ArrayCollection();
+        $this->jumpingTilts = new ArrayCollection();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -69,27 +76,63 @@ class Lending
         return $this;
     }
 
-    public function getJumpingTilt(): ?JumpingTilt
+    /**
+     * @return Collection|Riser[]
+     */
+    public function getRisers(): Collection
     {
-        return $this->jumpingTilt;
+        return $this->risers;
     }
 
-    public function setJumpingTilt(JumpingTilt $jumpingTilt): self
+    public function addRiser(Riser $riser): self
     {
-        $this->jumpingTilt = $jumpingTilt;
+        if (!$this->risers->contains($riser)) {
+            $this->risers[] = $riser;
+            $riser->addLending($this);
+        }
 
         return $this;
     }
 
-    public function getRiser(): ?Riser
+    public function removeRiser(Riser $riser): self
     {
-        return $this->riser;
-    }
-
-    public function setRiser(?Riser $riser): self
-    {
-        $this->riser = $riser;
+        if ($this->risers->contains($riser)) {
+            $this->risers->removeElement($riser);
+            $riser->removeLending($this);
+        }
 
         return $this;
     }
+
+    /**
+     * @return Collection|JumpingTilt[]
+     */
+    public function getJumpingTilts(): Collection
+    {
+        return $this->jumpingTilts;
+    }
+
+    public function addJumpingTilt(JumpingTilt $jumpingTilt): self
+    {
+        if (!$this->jumpingTilts->contains($jumpingTilt)) {
+            $this->jumpingTilts[] = $jumpingTilt;
+            $jumpingTilt->addLending($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJumpingTilt(JumpingTilt $jumpingTilt): self
+    {
+        if ($this->jumpingTilts->contains($jumpingTilt)) {
+            $this->jumpingTilts->removeElement($jumpingTilt);
+            $jumpingTilt->removeLending($this);
+        }
+
+        return $this;
+    }
+
+   
+
+    
 }
