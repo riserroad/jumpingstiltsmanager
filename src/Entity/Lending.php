@@ -29,7 +29,7 @@ class Lending
     private $end_date;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $jumpingTilt;

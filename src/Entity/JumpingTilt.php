@@ -53,7 +53,7 @@ class JumpingTilt
     private $repair_comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt", cascade={"persist", "remove"})
      */
     private $lending;
 
