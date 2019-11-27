@@ -1,12 +1,73 @@
 easy_admin:
-   entities:
-       # List the entity class name you want to manage 
-        - App\Entity\Riser
-        - App\Entity\Lending
-        - App\Entity\JumpingTilt
-        - App\Entity\RepairCommentary
-        - App\Entity\State
-        - App\Entity\Category
+    site_name: 'Gestion des paires echasse'
+    entities:
+        Riser:
+            class: App\Entity\Riser
+            label: 'Utilisateur'
+            help: "Les utilisteur qui loue les paires echasse"
+            new:
+                title: 'Ajouter un utiliateur '
+            list: 
+                fields:
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'birthdate', label: 'Date de naissance' }
+            form:
+                fields:
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'birthdate', label: 'Date de naissance' }
+        Echasse: 
+            class: App\Entity\JumpingTilt
+            label: 'Paire Echasse'
+            help: 'Les paires Echasse du club Riser Road'
+            new:
+                title: "Ajouter une paire echasse"
+            list: 
+                fields:
+                    - { property: 'reference', label: 'Référence' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'weight', label: 'Dureté des lames' }
+                    - { property: 'state', label: 'Etat' }
+                    - { property: 'category', label: 'Catégorie' }
+            form:
+                fields:
+                    - { property: 'reference', label: 'Référence' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'weight', label: 'Dureté des lames' }
+                    - { property: 'state', label: 'Etat' }
+                    - { property: 'category', label: 'Catégorie' }
 
-        
-       
+        Location:
+            class: App\Entity\Lending
+            label: 'Location'
+            help: 'les location loué'
+            new: 
+                title: 'Ajouter une location'
+            list:
+                fields:
+                    - { property: 'startDate', label: 'Début location' }
+                    - { property: 'endDate', label: 'Fin location' }
+                    - risers
+                    - jumpingTilts
+            form:
+                fields:
+                    - { property: 'startDate', label: 'Début location' }
+                    - { property: 'endDate', label: 'Fin location' }
+                    - risers
+                    - jumpingTilts
+        Categories: 
+            class: App\Entity\Category
+            new:
+                title: 'Ajouter une catégorie'
+            list:
+                fields:
+                    - { property: 'name', label: 'Catégorie' }
+        Etats: 
+            class: App\Entity\State
+            new: 
+                title: 'Ajouter un etat'
+            list: 
+                fields:
+                    - { property: 'name', label: 'Etats' }
+                    
