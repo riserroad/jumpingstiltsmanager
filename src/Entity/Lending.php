@@ -32,13 +32,16 @@ class Lending
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $riser;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="lendings")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $jumpingTilt;
+
 
     
     public function __toString()
@@ -99,6 +102,7 @@ class Lending
         return $this;
     }
 
+  
     
    
 

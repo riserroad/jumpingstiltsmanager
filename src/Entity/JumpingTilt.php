@@ -53,14 +53,10 @@ class JumpingTilt
     private $repair_comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lending", inversedBy="jumpingTilts")
-     */
-    private $lending;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt")
      */
     private $lendings;
+
 
    
 
@@ -202,6 +198,7 @@ class JumpingTilt
         return $this;
     }
 
+   
 
    
 }

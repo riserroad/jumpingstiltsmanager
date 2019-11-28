@@ -36,21 +36,16 @@ class Riser
     private $birthdate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lending", inversedBy="risers")
-     */
-    private $lending;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lending", mappedBy="riser")
      */
     private $lendings;
 
     public function __construct()
     {
-        $this->lending = new ArrayCollection();
         $this->lendings = new ArrayCollection();
     }
 
+    
    
 
     public function __toString()
@@ -129,6 +124,8 @@ class Riser
 
         return $this;
     }
+
+   
 
    
 }
