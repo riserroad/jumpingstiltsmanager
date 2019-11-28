@@ -51,11 +51,7 @@ class JumpingTilt
     private $lendings;
 
     /**
-<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="App\Entity\RepairCommentary", mappedBy="jumpingTilt", orphanRemoval=true)
-=======
-     * @ORM\ManyToMany(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt", cascade={"persist", "remove"})
->>>>>>> 9bca3f9... remove the oneToOne relation between lendind et jumping-tilt
      */
     private $repairCommentaries;
 
@@ -63,6 +59,11 @@ class JumpingTilt
     {
         $this->lendings = new ArrayCollection();
         $this->repairCommentaries = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->reference; 
     }
 
     public function getId(): ?int

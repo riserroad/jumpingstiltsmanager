@@ -1,14 +1,17 @@
 easy_admin:
-    site_name: 'Gestion des paires echasse'
+    formats:
+        date: 'd/m/Y'
+    site_name: 'Gestion des paires d''échasses'
     entities:
         Riser:
             class: App\Entity\Riser
             label: 'Utilisateur'
-            help: "Les utilisteur qui loue les paires echasse"
+            help: 'Les utilisteur qui loue les paires d''échasses'
             new:
                 title: 'Ajouter un utiliateur '
             list: 
                 fields:
+                    - 'id' 
                     - { property: 'firstname', label: 'Prénom' }
                     - { property: 'lastname', label: 'Nom' }
                     - { property: 'birthdate', label: 'Date de naissance' }
@@ -16,15 +19,23 @@ easy_admin:
                 fields:
                     - { property: 'firstname', label: 'Prénom' }
                     - { property: 'lastname', label: 'Nom' }
+                    - { property: 'birthdate', label: 'Date de naissance' , type_options: { widget: 'single_text'} }
+            show:
+                fields:
+                    - 'id' 
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'lastname', label: 'Nom' }
                     - { property: 'birthdate', label: 'Date de naissance' }
+                    - { property: 'lendings' , label: 'Locations' }
         Echasse: 
             class: App\Entity\JumpingTilt
-            label: 'Paire Echasse'
-            help: 'Les paires Echasse du club Riser Road'
+            label: 'Paire d''Echasses'
+            help: 'Les paires d''Echasses du club Riser Road'
             new:
-                title: "Ajouter une paire echasse"
+                title: "Ajouter une paire d'echasse"
             list: 
                 fields:
+                    - 'id'
                     - { property: 'reference', label: 'Référence' }
                     - { property: 'description', label: 'Description' }
                     - { property: 'weight', label: 'Dureté des lames' }
@@ -37,6 +48,14 @@ easy_admin:
                     - { property: 'weight', label: 'Dureté des lames' }
                     - { property: 'state', label: 'Etat' }
                     - { property: 'category', label: 'Catégorie' }
+            show:
+                fields:
+                    - { property: 'reference', label: 'Référence' }
+                    - { property: 'description', label: 'Description' }
+                    - { property: 'weight', label: 'Dureté des lames' }
+                    - { property: 'state', label: 'Etat' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'lendings', label: 'Locations' }
 
         Location:
             class: App\Entity\Lending
@@ -46,16 +65,25 @@ easy_admin:
                 title: 'Ajouter une location'
             list:
                 fields:
+                    - 'id'  
                     - { property: 'startDate', label: 'Début location' }
                     - { property: 'endDate', label: 'Fin location' }
-                    - risers
-                    - jumpingTilts
+                    - { property: 'riser', label: 'Loueur' }
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }
             form:
                 fields:
                     - { property: 'startDate', label: 'Début location' }
                     - { property: 'endDate', label: 'Fin location' }
-                    - risers
-                    - jumpingTilts
+                    - { property: 'riser', label: 'Loueur' }
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }   
+            show:
+                fields:
+                    - 'id'
+                    - { property: 'startDate', label: 'Début location' }
+                    - { property: 'endDate', label: 'Fin location' }
+                    - { property: 'riser', label: 'Loueur' }
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }   
+
         Categories: 
             class: App\Entity\Category
             new:
@@ -63,6 +91,14 @@ easy_admin:
             list:
                 fields:
                     - { property: 'name', label: 'Catégorie' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Catégorie' }
+            show:
+                fields:
+                    - { property: 'name', label: 'Catégorie' }
+                    - { property: 'jumpingTilts', label: 'Paires d''échasses' }
+                    
         Etats: 
             class: App\Entity\State
             new: 
@@ -70,4 +106,8 @@ easy_admin:
             list: 
                 fields:
                     - { property: 'name', label: 'Etats' }
+            show:
+                fields:
+                    - { property: 'name', label: 'Etats' }
+                    - { property: 'jumpingTilts', label: 'Paires d''échasses' }
                     

@@ -43,6 +43,11 @@ class Riser
         $this->lendings = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->firstname . " " . $this->lastname ; 
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,7 +72,7 @@ class Riser
 
     public function setLastname(string $lastname): self
     {
-        $this->lastname = $lastname;
+        $this->lastname = strtoupper($lastname);
 
         return $this;
     }

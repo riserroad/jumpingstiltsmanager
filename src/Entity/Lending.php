@@ -27,11 +27,7 @@ class Lending
     private $endDate;
 
     /**
-<<<<<<< HEAD
      * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
-=======
-     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", inversedBy="lending", cascade={"persist", "remove"})
->>>>>>> 9bca3f9... remove the oneToOne relation between lendind et jumping-tilt
      * @ORM\JoinColumn(nullable=false)
      */
     private $riser;
@@ -42,6 +38,13 @@ class Lending
      */
     private $jumpingTilt;
 
+
+    
+    public function __toString()
+    {
+        return "location N° " . $this->id ; 
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
