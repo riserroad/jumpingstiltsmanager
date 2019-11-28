@@ -18,7 +18,7 @@ easy_admin:
                 fields:
                     - { property: 'firstname', label: 'Prénom' }
                     - { property: 'lastname', label: 'Nom' }
-                    - { property: 'birthdate', label: 'Date de naissance' }
+                    - { property: 'birthdate', label: 'Date de naissance' , type_options: { widget: 'single_text'} }
         Echasse: 
             class: App\Entity\JumpingTilt
             label: 'Paire Echasses'
