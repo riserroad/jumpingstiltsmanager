@@ -46,7 +46,7 @@ class Lending
     
     public function __toString()
     {
-        return "sera supprimer  "; 
+        return "location N° " . $this->id ; 
     }
     
     public function getId(): ?int
