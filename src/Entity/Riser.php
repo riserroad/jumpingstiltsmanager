@@ -50,7 +50,7 @@ class Riser
 
     public function __toString()
     {
-        return $this->firstname . " " . strtoupper($this->lastname) ; 
+        return $this->firstname . " " . $this->lastname ; 
     }
 
     public function getId(): ?int
@@ -77,7 +77,7 @@ class Riser
 
     public function setLastname(string $lastname): self
     {
-        $this->lastname = $lastname;
+        $this->lastname = strtoupper($lastname);
 
         return $this;
     }
