@@ -57,12 +57,18 @@ class JumpingTilt
      */
     private $lending;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lending", mappedBy="jumpingTilt")
+     */
+    private $lendings;
+
    
 
     public function __construct()
     {
         $this->repair_comments = new ArrayCollection();
         $this->lending = new ArrayCollection();
+        $this->lendings = new ArrayCollection();
     }
     public function __toString()
     {
@@ -168,15 +174,16 @@ class JumpingTilt
     /**
      * @return Collection|Lending[]
      */
-    public function getLending(): Collection
+    public function getLendings(): Collection
     {
-        return $this->lending;
+        return $this->lendings;
     }
 
     public function addLending(Lending $lending): self
     {
-        if (!$this->lending->contains($lending)) {
-            $this->lending[] = $lending;
+        if (!$this->lendings->contains($lending)) {
+            $this->lendings[] = $lending;
+            $lending->setJumpingTilt($this);
         }
 
         return $this;
@@ -184,12 +191,17 @@ class JumpingTilt
 
     public function removeLending(Lending $lending): self
     {
-        if ($this->lending->contains($lending)) {
-            $this->lending->removeElement($lending);
+        if ($this->lendings->contains($lending)) {
+            $this->lendings->removeElement($lending);
+            // set the owning side to null (unless already changed)
+            if ($lending->getJumpingTilt() === $this) {
+                $lending->setJumpingTilt(null);
+            }
         }
 
         return $this;
     }
+
 
    
 }

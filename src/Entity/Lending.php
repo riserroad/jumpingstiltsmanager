@@ -31,21 +31,20 @@ class Lending
     private $end_date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Riser", mappedBy="lending")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Riser", inversedBy="lendings")
      */
-    private $risers;
+    private $riser;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\JumpingTilt", mappedBy="lending")
+     * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="lendings")
      */
-    private $jumpingTilts;
+    private $jumpingTilt;
 
-    public function __construct()
+    
+    public function __toString()
     {
-        $this->risers = new ArrayCollection();
-        $this->jumpingTilts = new ArrayCollection();
+        return "sera supprimer  "; 
     }
-
     
     public function getId(): ?int
     {
@@ -76,62 +75,31 @@ class Lending
         return $this;
     }
 
-    /**
-     * @return Collection|Riser[]
-     */
-    public function getRisers(): Collection
+    public function getRiser(): ?Riser
     {
-        return $this->risers;
+        return $this->riser;
     }
 
-    public function addRiser(Riser $riser): self
+    public function setRiser(?Riser $riser): self
     {
-        if (!$this->risers->contains($riser)) {
-            $this->risers[] = $riser;
-            $riser->addLending($this);
-        }
+        $this->riser = $riser;
 
         return $this;
     }
 
-    public function removeRiser(Riser $riser): self
+    public function getJumpingTilt(): ?JumpingTilt
     {
-        if ($this->risers->contains($riser)) {
-            $this->risers->removeElement($riser);
-            $riser->removeLending($this);
-        }
+        return $this->jumpingTilt;
+    }
+
+    public function setJumpingTilt(?JumpingTilt $jumpingTilt): self
+    {
+        $this->jumpingTilt = $jumpingTilt;
 
         return $this;
     }
 
-    /**
-     * @return Collection|JumpingTilt[]
-     */
-    public function getJumpingTilts(): Collection
-    {
-        return $this->jumpingTilts;
-    }
-
-    public function addJumpingTilt(JumpingTilt $jumpingTilt): self
-    {
-        if (!$this->jumpingTilts->contains($jumpingTilt)) {
-            $this->jumpingTilts[] = $jumpingTilt;
-            $jumpingTilt->addLending($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJumpingTilt(JumpingTilt $jumpingTilt): self
-    {
-        if ($this->jumpingTilts->contains($jumpingTilt)) {
-            $this->jumpingTilts->removeElement($jumpingTilt);
-            $jumpingTilt->removeLending($this);
-        }
-
-        return $this;
-    }
-
+    
    
 
     

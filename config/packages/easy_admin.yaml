@@ -1,12 +1,14 @@
 easy_admin:
-    site_name: 'Gestion des paires echasse'
+    formats:
+        date: 'd/m/Y'
+    site_name: 'Gestion des paires echasses'
     entities:
         Riser:
             class: App\Entity\Riser
             label: 'Utilisateur'
-            help: "Les utilisteur qui loue les paires echasse"
+            help: "Les utilisteur qui loue les paires echasses"
             new:
-                title: 'Ajouter un utiliateur '
+                title: 'Ajouter un utilisateur '
             list: 
                 fields:
                     - { property: 'firstname', label: 'Prénom' }
@@ -19,8 +21,8 @@ easy_admin:
                     - { property: 'birthdate', label: 'Date de naissance' }
         Echasse: 
             class: App\Entity\JumpingTilt
-            label: 'Paire Echasse'
-            help: 'Les paires Echasse du club Riser Road'
+            label: 'Paire Echasses'
+            help: 'Les paires Echasses du club Riser Road'
             new:
                 title: "Ajouter une paire echasse"
             list: 
@@ -48,14 +50,14 @@ easy_admin:
                 fields:
                     - { property: 'start_date', label: 'Début location' }
                     - { property: 'end_date', label: 'Fin location' }
-                    - risers
-                    - jumpingTilts
+                    - { property: 'riser', label: 'Loueur' }
+                    - { property: 'jumpingTilt', label: 'Echasse' }
             form:
                 fields:
                     - { property: 'start_date', label: 'Début location' }
                     - { property: 'end_date', label: 'Fin location' }
-                    - risers
-                    - jumpingTilts
+                    - { property: 'riser', label: 'Loueur' }
+                    - { property: 'jumpingTilt', label: 'Echasse' }    
         Categories: 
             class: App\Entity\Category
             new:
