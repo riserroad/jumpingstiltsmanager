@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RepairCommentaryRepository")
@@ -19,11 +20,13 @@ class RepairCommentary
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="repairCommentaries")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank
      */
     private $jumpingTilt;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank 
      */
     private $repairDate;
 

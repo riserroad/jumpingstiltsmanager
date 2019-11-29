@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JumpingTiltRepository")
+ * @UniqueEntity("reference")
  */
 class JumpingTilt
 {
@@ -19,7 +22,9 @@ class JumpingTilt
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern = "/[A-Z]([0-9]){2}/", message = "La référence doit commencer par une lettre majuscule suivi de 2 chiffre ex: A02")
      */
     private $reference;
 
@@ -30,6 +35,7 @@ class JumpingTilt
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(min = 5, max = 150)
      */
     private $weight;
 
