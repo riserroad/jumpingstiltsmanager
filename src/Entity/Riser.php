@@ -33,6 +33,7 @@ class Riser
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Date
      */
     private $birthdate;
 
