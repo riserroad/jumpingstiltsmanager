@@ -19,7 +19,9 @@ class LendingDateValidator extends ConstraintValidator
     }
     public function validate($value, Constraint $constraint)
     {
-        dump($value);
+        if (!$value instanceof Lending) {
+            throw new UnexpectedTypeException($value, Lending::class);
+        }
 
         $startDate = $value->getStartDate();
         $endDate = $value->getEndDate();
@@ -29,48 +31,12 @@ class LendingDateValidator extends ConstraintValidator
         $lendings = $this->lendingRepository->findByJumpingTilt($idJumpingTilt);
 
         foreach ($lendings as $lending) {
-            if (($startDate >= $lending->getStartDate() && $startDate <= $lending->getEndDate()) || ($endDate >= $lending->getStartDate() && $endDate <= $lending->getEndDate()))
-            {
-                dump("violation en cours"); 
+            if (($startDate >= $lending->getStartDate() && $startDate <= $lending->getEndDate()) || ($endDate >= $lending->getStartDate() && $endDate <= $lending->getEndDate())) {
                 $this->context->buildViolation($constraint->message)
                     ->addViolation();
+
+                break;
             }
-                dump($lending);
         }
-
-        dump($lendings);
-
-        dump($startDate);
-        dump($endDate);
-
-
-
-        // $lendings = $this->lendingRepository->findBy()
-
-
-        // die();
-        // if (!$constraint instanceof ContainsAlphanumeric) {
-        //     throw new UnexpectedTypeException($constraint, ContainsAlphanumeric::class);
-        // }
-
-        // // custom constraints should ignore null and empty values to allow
-        // // other constraints (NotBlank, NotNull, etc.) take care of that
-        // if (null === $value || '' === $value) {
-        //     return;
-        // }
-
-        // if (!is_string($value)) {
-        //     // throw this exception if your validator cannot handle the passed type so that it can be marked as invalid
-        //     throw new UnexpectedValueException($value, 'string');
-
-        //     // separate multiple types using pipes
-        //     // throw new UnexpectedValueException($value, 'string|int');
-        // }
-
-        // if (!preg_match('/^[a-zA-Z0-9]+$/', $value, $matches)) {
-        //     $this->context->buildViolation($constraint->message)
-        //         ->setParameter('{{ string }}', $value)
-        //         ->addViolation();
-        // }
     }
 }
