@@ -22,14 +22,12 @@ class Lending
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank
-     * @Assert\Date
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank
-     * @Assert\Date
+     * @Assert\NotBlank     
      * @Assert\GreaterThanOrEqual(propertyPath="startDate")
      */
     private $endDate;

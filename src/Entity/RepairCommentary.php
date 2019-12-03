@@ -26,8 +26,7 @@ class RepairCommentary
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank 
-     * @Assert\Date
+     * @Assert\NotBlank
      */
     private $repairDate;
 
