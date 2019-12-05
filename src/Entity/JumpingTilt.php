@@ -61,6 +61,23 @@ class JumpingTilt
      */
     private $repairCommentaries;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rubber", inversedBy="jumpingTilts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rubber;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\StorageArea", inversedBy="jumpingTilts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $storageArea;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ModelJumpingStilt", inversedBy="jumpingTilts")
+     */
+    private $model;
+
     public function __construct()
     {
         $this->lendings = new ArrayCollection();
@@ -195,6 +212,42 @@ class JumpingTilt
                 $repairCommentary->setJumpingTilt(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRubber(): ?Rubber
+    {
+        return $this->rubber;
+    }
+
+    public function setRubber(?Rubber $rubber): self
+    {
+        $this->rubber = $rubber;
+
+        return $this;
+    }
+
+    public function getStorageArea(): ?StorageArea
+    {
+        return $this->storageArea;
+    }
+
+    public function setStorageArea(?StorageArea $storageArea): self
+    {
+        $this->storageArea = $storageArea;
+
+        return $this;
+    }
+
+    public function getModel(): ?ModelJumpingStilt
+    {
+        return $this->model;
+    }
+
+    public function setModel(?ModelJumpingStilt $model): self
+    {
+        $this->model = $model;
 
         return $this;
     }

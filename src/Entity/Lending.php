@@ -44,6 +44,12 @@ class Lending
      */
     private $jumpingTilt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LendingStatus", inversedBy="lendings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
 
     
     public function __toString()
@@ -100,6 +106,18 @@ class Lending
     public function setJumpingTilt(?JumpingTilt $jumpingTilt): self
     {
         $this->jumpingTilt = $jumpingTilt;
+
+        return $this;
+    }
+
+    public function getStatus(): ?LendingStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?LendingStatus $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
