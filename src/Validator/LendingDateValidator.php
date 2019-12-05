@@ -31,6 +31,11 @@ class LendingDateValidator extends ConstraintValidator
         $lendings = $this->lendingRepository->findByJumpingTilt($idJumpingTilt);
 
         foreach ($lendings as $lending) {
+            if ( $value->getId() == $lending->getId())
+            {
+                continue; 
+            }
+
             if (($startDate >= $lending->getStartDate() && $startDate <= $lending->getEndDate()) || ($endDate >= $lending->getStartDate() && $endDate <= $lending->getEndDate())) {
                 $this->context->buildViolation($constraint->message)
                     ->addViolation();
