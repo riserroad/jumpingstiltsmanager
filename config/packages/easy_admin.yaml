@@ -2,11 +2,13 @@ easy_admin:
     formats:
         date: 'd/m/Y'
     site_name: 'Gestion des paires d''échasses'
+    list:
+        actions: ['show']
     entities:
         Riser:
             class: App\Entity\Riser
             label: 'Utilisateur'
-            help: 'Les utilisteur qui loue les paires d''échasses'
+            help: 'Les utilisateur qui loue les paires d''échasses'
             new:
                 title: 'Ajouter un utiliateur '
             list: 
@@ -41,6 +43,9 @@ easy_admin:
                     - { property: 'weight', label: 'Dureté des lames' }
                     - { property: 'state', label: 'Etat' }
                     - { property: 'category', label: 'Catégorie' }
+                    - { property: 'storageArea', label: 'Lieu de stockage' }
+                    - { property: 'model', label: 'Model' }
+                    - { property: 'rubber', label: 'couleurs des tampons' }
             form:
                 fields:
                     - { property: 'reference', label: 'Référence' }
@@ -48,6 +53,9 @@ easy_admin:
                     - { property: 'weight', label: 'Dureté des lames' }
                     - { property: 'state', label: 'Etat' }
                     - { property: 'category', label: 'Catégorie' }
+                    - { property: 'storageArea', label: 'Lieu de stockage' }
+                    - { property: 'model', label: 'Model' }
+                    - { property: 'rubber', label: 'couleurs des tampons' }
             show:
                 fields:
                     - { property: 'reference', label: 'Référence' }
@@ -55,6 +63,9 @@ easy_admin:
                     - { property: 'weight', label: 'Dureté des lames' }
                     - { property: 'state', label: 'Etat' }
                     - { property: 'category', label: 'Catégorie' }
+                    - { property: 'storageArea', label: 'Lieu de stockage' }
+                    - { property: 'model', label: 'Model' }
+                    - { property: 'rubber', label: 'couleurs des tampons' }
                     - { property: 'lendings', label: 'Locations' }
 
         Location:
@@ -66,23 +77,26 @@ easy_admin:
             list:
                 fields:
                     - 'id'  
-                    - { property: 'startDate', label: 'Début location' }
+                    - { property: 'startDate', label: 'Début location', auto_initialize: 'today' }
                     - { property: 'endDate', label: 'Fin location' }
                     - { property: 'riser', label: 'Loueur' }
                     - { property: 'jumpingTilt', label: 'paire d''échasse' }
+                    - { property: 'status', label: 'Status' }
             form:
                 fields:
                     - { property: 'startDate', label: 'Début location' }
                     - { property: 'endDate', label: 'Fin location' }
                     - { property: 'riser', label: 'Loueur' }
-                    - { property: 'jumpingTilt', label: 'paire d''échasse' }   
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' } 
+                    - { property: 'status', label: 'Status' }  
             show:
                 fields:
                     - 'id'
                     - { property: 'startDate', label: 'Début location' }
                     - { property: 'endDate', label: 'Fin location' }
                     - { property: 'riser', label: 'Loueur' }
-                    - { property: 'jumpingTilt', label: 'paire d''échasse' }   
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' } 
+                    - { property: 'status', label: 'Status' }  
 
         Categories: 
             class: App\Entity\Category
@@ -110,4 +124,75 @@ easy_admin:
                 fields:
                     - { property: 'name', label: 'Etats' }
                     - { property: 'jumpingTilts', label: 'Paires d''échasses' }
+            form:
+                fields:
+                    - { property: 'name', label: 'Etats' }
+
+        Reparation:
+            class: App\Entity\RepairCommentary
+            new: 
+                title: 'Ajouter un commentaire de réparation'
+            list:
+                fields:
+                    - 'id'
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }
+                    - { property: 'repairDate', label: 'date de réparation' }
+                    - { property: 'comment', label: 'réparation effectué' }
+            form:
+                fields:
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }
+                    - { property: 'repairDate', label: 'date de réparation' }
+                    - { property: 'comment', label: 'réparation effectué' }
+            show:
+                fields:
+                    - { property: 'jumpingTilt', label: 'paire d''échasse' }
+                    - { property: 'repairDate', label: 'date de réparation' }
+                    - { property: 'comment', label: 'réparation effectué' }
+
+        Lieu:
+            class: App\Entity\StorageArea
+            new:
+                title: 'ajouter un lieu de stockage'
+            list:
+                fields:
+                    - { property: 'name', label: 'lieu de stockage' }
+            form:
+                fields: 
+                    - { property: 'name', label: 'lieu de stockage' }
+            show:
+                fields: 
+                    - { property: 'name', label: 'lieu de stockage' }
+                    - { property: 'jumpingTilts', label: 'Paires d''échasses' }
+
+        Model:
+            class: App\Entity\ModelJumpingStilt
+            new: 
+                title: 'ajouter une marque de paire d''échasses'
+            list: 
+                fields:
+                    - { property: 'name', label: 'Model' }
+            form:
+                fields: 
+                    - { property: 'name', label: 'Model' }
+            show:
+                fields: 
+                    - { property: 'name', label: 'Model' }
+                    - { property: 'jumpingTilts', label: 'Paire d''échasses' }
+
+        Semelle:
+            class: App\Entity\Rubber
+            list:
+                actions: ['show', '-delete', '-edit' ]
+                fields:
+                    - { property: 'color', label: 'Semmele' }
+                   
+            show:
+                action: ['-edit', '-delete' ]
+                fields:
+                    - { property: 'color', label: 'Semmele' }
+                    - { property: 'jumpingTilts', label: 'Paire d''échasses' }
+            form:
+                fields:
+                     - { property: 'jumpingTilts', label: 'Paire d''échasses' }
+                
                     

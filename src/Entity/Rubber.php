@@ -33,6 +33,11 @@ class Rubber
         $this->jumpingTilts = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->color; 
+    }
+
     public function getId(): ?int
     {
         return $this->id;
