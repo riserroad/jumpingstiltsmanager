@@ -16,7 +16,7 @@ class MailManager
         $this->twig = $twig;
     }
 
-    public function sendLendingAlertMail(Lending $lending)
+    public function sendLendingAlertMail(array $lendings)
     {
         $message = new \Swift_Message('Alert Location');
         $message
@@ -33,7 +33,7 @@ class MailManager
                 $this->twig->render(
                     'mail/lendingAlert.txt.twig',
                     [
-                        'lending' => $lending,
+                        'lendings' => $lendings,
                     ]
                 ),
                 'text/plain'
