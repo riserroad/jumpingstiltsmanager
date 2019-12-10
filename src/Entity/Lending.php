@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator as CustomAssert;
+use DateInterval;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LendingRepository")
@@ -49,6 +51,15 @@ class Lending
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    public function __construct()
+    {
+        $this->startDate = new DateTime(); 
+        $this->endDate = new DateTime(); 
+
+        // add 3 months on the endDate  ( period of lending )
+        $this->endDate->add(new DateInterval('P3M')); 
+    }
 
 
     

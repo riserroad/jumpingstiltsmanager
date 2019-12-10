@@ -77,7 +77,7 @@ easy_admin:
             list:
                 fields:
                     - 'id'  
-                    - { property: 'startDate', label: 'Début location', auto_initialize: 'today' }
+                    - { property: 'startDate', label: 'Début location' }
                     - { property: 'endDate', label: 'Fin location' }
                     - { property: 'riser', label: 'Loueur' }
                     - { property: 'jumpingTilt', label: 'paire d''échasse' }
