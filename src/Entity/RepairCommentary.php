@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,6 +35,11 @@ class RepairCommentary
      * @ORM\Column(type="text")
      */
     private $comment;
+
+    public function __construct()
+    {
+        $this->repairDate = new DateTime();
+    }
 
     public function getId(): ?int
     {
