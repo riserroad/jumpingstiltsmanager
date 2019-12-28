@@ -26,6 +26,11 @@ class LendingDateValidator extends ConstraintValidator
         $startDate = $value->getStartDate();
         $endDate = $value->getEndDate();
 
+        if(!$value->getJumpingTilt())
+        {
+            return ;
+        }
+
         $idJumpingTilt = $value->getJumpingTilt()->getId();
 
         $lendings = $this->lendingRepository->findByJumpingTilt($idJumpingTilt);

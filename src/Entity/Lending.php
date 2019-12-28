@@ -42,7 +42,7 @@ class Lending
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\JumpingTilt", inversedBy="lendings")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $jumpingTilt;
 
