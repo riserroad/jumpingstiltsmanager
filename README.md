@@ -11,7 +11,7 @@ version francais :
 
 - **Lending** : table qui contient les locations des Echasses
 - **Riser** : liste de tout les Riser du club 
-- **Category** : Category de la paire d'échasse ( _baby , junior, aldute_ ) . 
+- **Category** : Category de la paire d'échasse ( _baby , junior, aldut_ ) . 
 - **State** : status de l'échasse ( _OK, KO, Special_) 
 - **RepairCommentary** : commentaire des réparations des échasses urbaine, un commentaire est lier à une paire d'échasse
 - **JumpingTilt** : tables qui décrit les paires d'échasse, on a comme info, la dureté des lames d'échasse, une bref description, et la référence, et autre détails . 
@@ -33,10 +33,12 @@ _dans le dossier du projet_
 3. taper : `composer install`
 4. modifier le fichier **.env** et modifié la ligne _27_ pour la connexion à la BDD. 
 5. mettre le fichier sur le serveur ( **seul le dossier public doit etre accecible par le serveur** ) 
-_dans le dossier du projet à la racine_ 
-6. taper la commande `php bin/console doctrine:migration:migrate` 
-7. vérifier que tous fonctionne, et ajouter des donné. 
+_dans le dossier du projet à la racine_
+6. crée un utilisateur manuellement ( directement en BDD en générant le hash sur la table **User** ou désactiver temporairement la sécurité sur la route **/register** afin de crée un nouvel utilisateur ( attention, ne pas oublier de réactiver la sécurité )  
+7. taper la commande `php bin/console doctrine:migration:migrate` 
+8. vérifier que tous fonctionne, et ajouter des donné. 
 
+9. pour l'envoi des mail planifier un crontable sur la commande : `php bin/console riserroad:verif-lending --mail` ( par défaut, ça envoi sur les adresses mail des membres du bureau Riser Road, modifié si neccesaire dans le code _Service/mailManager.php_ 
 
 ## fonctionement 
 
@@ -80,6 +82,14 @@ modify the .env.local  file and modify line 27 to connect to the database.
 4. put the file on the server ( **only the public folder must be accessible by the server** ) in the project folder at the root
 5. type the php bin / console doctrine command: migration: migrate
 check that all works, and add data.
+6. create a user manually (directly in BDD by generating the hash on the table **User** or temporarily deactivate security on the route **/register** in order to create a new user (be careful, do not forget to reactivate Security )
+7. type the command `php bin/console doctrine: migration: migrate`
+8. check that all works, and add data.
+
+9. for sending emails plan a crontable on the command: `php bin/console riserroad: verif-lending --mail` (by default, this sends to the email addresses of members of the Riser Road office, modified if
+ necessary in the _Service/mailManager.php_ code
+
+
 ## FUNCTIONING
 
 go to the admin area
